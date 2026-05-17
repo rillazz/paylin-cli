@@ -1,0 +1,86 @@
+from enum import StrEnum
+
+
+class Category(StrEnum):
+    MACHINERY = "machinery"
+    INDUSTRIAL = "industrial"
+    PACKAGING = "packaging"
+    AGRICULTURE_FOOD = "agriculture_food"
+    CHEMICALS = "chemicals"
+    CONSUMER_GOODS = "consumer_goods"
+    TOOLS = "tools"
+    HEALTH_MEDICINE = "health_medicine"
+    ARTS = "arts"
+    SERVICE = "service"
+
+
+class Certification(StrEnum):
+    ISO_9001 = "iso9001"
+    ISO_14001 = "iso14001"
+    ISO_9001_2015 = "iso9001_2015"
+    ISO_9000 = "iso9000"
+    GMP = "gmp"
+    OTHER = "other"
+    BSCI = "bsci"
+    ISO_20000 = "iso20000"
+    ISO_14000 = "iso14000"
+    ISO_45001_2018 = "iso45001_2018"
+    QC_080004 = "qc_080004"
+    ISO_14064 = "iso14064"
+    HSE = "hse"
+    OHSAS_OHSMS_18005 = "ohsas_ohsms_18005"
+    IATF16949 = "iatf16949"
+    HACCP = "haccp"
+    ISO_22000 = "iso22000"
+    BRC = "brc"
+    FSC = "fsc"
+    IFS = "ifs"
+    ASME = "asme"
+    SEDEX = "sedex"
+    GAP = "gap"
+    SA_8004 = "sa8004"
+    SHE_AUDITS = "she_audits"
+    ISO_10012 = "iso10012"
+    QHSE = "qhse"
+    EICC = "eicc"
+    WRAP = "wrap"
+    ANSI_ESD = "ansi_esd"
+    QSR = "qsr"
+    HQE = "hqe"
+    ISO_17025 = "iso17025"
+    ISO_50001 = "iso50001"
+    ISO_13485 = "iso13485"
+    PAS_28000 = "pas28000"
+    AIB = "aib"
+    BREEAM = "breeam"
+    ISO_29001 = "iso29001"
+    LEED = "leed"
+    BS_25999_2 = "bs25999_2"
+    ISO_14001_2015 = "iso14001_2015"
+
+
+class BusinessType(StrEnum):
+    MANUFACTURER = "manufacturer"
+    TRADER = "trader"
+    GROUP = "group"
+    SOHO = "soho"
+    OTHER = "other"
+
+
+class Revenue(StrEnum):
+    UNDER_1M = "under_1m"
+    FROM_1M_TO_2_5M = "from_1m_to_2_5m"
+    FROM_2_5M_TO_5M = "from_2_5m_to_5m"
+    FROM_5M_TO_10M = "from_5m_to_10m"
+    FROM_10M_TO_50M = "from_10m_to_50m"
+    FROM_50M_TO_100M = "from_50m_to_100m"
+    MORE_THAN_100M = "more_than_100m"
+
+
+class Employees(StrEnum):
+    LESS_THAN_5 = "less_than_5"
+    FROM_5_TO_50 = "from_5_to_50"
+    FROM_51_TO_200 = "from_51_to_200"
+    FROM_201_TO_500 = "from_201_to_500"
+    FROM_501_TO_1000 = "from_501_to_1000"
+    MORE_THAN_1000 = "more_than_1000"
