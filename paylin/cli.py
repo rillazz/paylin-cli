@@ -73,6 +73,16 @@ def main(
             console.print("Running AI analysis...")
             analyzer = Analyzer(token=api_key, okved_code=okved)
             companies = analyzer.analyze_companies(companies)
+
+            companies = [
+                company
+                for company in companies
+                if (
+                    company.relevance_score is not None
+                    and company.relevance_score >= min_score
+                )
+            ]
+
             filtered_filepath = exporter.export("filtered_" + filename, companies)
             console.print(
                 f"[green]Filtered results ({len(companies)}) were written in file {filtered_filepath}"
