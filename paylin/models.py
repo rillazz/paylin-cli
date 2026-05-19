@@ -37,6 +37,11 @@ class Company:
     oem_available: str | None = None
     rnd_engineers: str | None = None
 
+    relevance_score: int | None = None
+    relevance_reason: str | None = None
+    import_potential: str | None = None
+    flags: str | None = None
+
 
 @dataclass(slots=True)
 class SearchFilters:

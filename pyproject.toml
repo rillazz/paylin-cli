@@ -1,14 +1,15 @@
 [project]
 name = "paylin"
 version = "0.1.0"
-description = "Add your description here"
+description = "CLI tool for scraping and analyzing suppliers from Made-in-China"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "beautifulsoup4>=4.14.3",
     "lxml>=6.1.0",
+    "openai>=2.37.0",
+    "pydantic>=2.13.4",
     "python-slugify>=8.0.4",
     "requests[socks]>=2.33.1",
-    "transliterate>=1.10.2",
     "typer>=0.25.1",
 ]

@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Annotated
 from rich.console import Console
 
+from paylin.analyzer import Analyzer
+
 
 from .enums import BusinessType, Certification, Category, Revenue, Employees
 from .exporter import MadeInChinaExporter
@@ -19,6 +21,7 @@ console = Console()
 def main(
     query: str,
     okved: str,
+    api_key: str,
     proxy: Annotated[
         str | None,
         typer.Option(
@@ -31,7 +34,6 @@ def main(
     category: Category | None = None,
     revenue: Revenue | None = None,
     employees: Employees | None = None,
-    detailed: Annotated[bool, typer.Option()] = False,
     min_score: Annotated[int, typer.Option(min=1, max=10)] = 7,
     limit: Annotated[int, typer.Option(min=1)] = 50,
     output_dir: Annotated[Path, typer.Option()] = Path("./output/"),
@@ -50,10 +52,14 @@ def main(
     )
     try:
         with MadeInChinaClient(proxy=proxy) as client:
+            console.print("Fetching companies...")
             companies = client.get_companies(filters=filters, limit=limit)
+            console.print(f"Companies ({len(companies)}) fetched")
+            console.print("Getting company details...")
+            companies = client.enrich_companies(companies)
+            console.print("Details fetched")
 
-            if detailed:
-                companies = client.enrich_companies(companies)
+            console.print("Exporting raw csv file...")
 
             filename = construct_filename(query=query, filtered=False)
             exporter = MadeInChinaExporter(directory=output_dir)
@@ -61,7 +67,15 @@ def main(
             filepath = exporter.export(filename, companies)
 
             console.print(
-                f"[green]Results ({len(companies)}) were written in file {filepath}"
+                f"[green]Unfiltered results ({len(companies)}) were written in file {filepath}"
+            )
+
+            console.print("Running AI analysis...")
+            analyzer = Analyzer(token=api_key, okved_code=okved)
+            companies = analyzer.analyze_companies(companies)
+            filtered_filepath = exporter.export("filtered_" + filename, companies)
+            console.print(
+                f"[green]Filtered results ({len(companies)}) were written in file {filtered_filepath}"
             )
     except Exception as e:
         console.print(f"[red]Error:[/red] {e}")
